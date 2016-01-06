@@ -13,5 +13,26 @@ int main(int argc, const char * argv[]) {
         // insert code here...
         NSLog(@"Hello, World!");
     }
-    return 0;
+    
+    NSInteger (^findLargestNumber)(NSArray *numbers);
+    NSArray *numbersArray = @[@3, @7, @6, @8];
+    
+    //BLOCK: Get the largest number from an Array
+    findLargestNumber = ^NSInteger(NSArray* numbers){
+        __block NSInteger largestNumber = 0;
+        
+        //Loop through the contents of the array
+        [numbers enumerateObjectsUsingBlock:^(id  number, NSUInteger idx, BOOL *stop) {
+            //Compare the numbers
+            if ([number intValue] > largestNumber){
+                largestNumber = [number intValue];
+            }
+        }];
+        
+        return largestNumber;
+    };
+    
+    NSLog(@"%ld",findLargestNumber(numbersArray));
+
 }
+
